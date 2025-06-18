@@ -3,11 +3,54 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Basic HTML</title>
-  <script src="https://unpkg.com/htmx.org@2"></script>
+  <title>Appraiser</title>
+  <!-- script src="https://unpkg.com/htmx.org@2"></script -->
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-  <h1>Hello, world!</h1>
-  <p>This is a basic HTML file.</p>
+<body class="bg-blue-50">
+  <div class="container mx-auto p-8 h-full">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div class="bg-gray-50 p-6 rounded-lg">
+        <h2 class="text-xl font-bold text-gray-800">Input</h2>
+        <div class="mb-6 mt-4">
+          <label
+            for="description"
+            class="block text-gray-700 text-sm font-bold mb-2"
+            >Description:</label
+          >
+          <textarea
+            id="description"
+            name="description"
+            rows="3"
+            class="bg-white shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500/50"
+          ></textarea>
+        </div>
+        <button
+          type="submit"
+          id="estimate-value-button"
+          hx-disable-element="this"
+          class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/50"
+        >
+          Estimate Value
+        </button>
+      </div>
+      <div class="bg-gray-50 p-6 rounded-lg">
+        <h2 class="text-xl font-bold text-gray-800">Result</h2>
+        <div id="results" class="h-full">
+          <!-- Valuation results will be displayed here -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    const estimateValueButton = document.getElementById('estimate-value-button');
+    estimateValueButton.addEventListener('click', function (event) {
+      const description = document.getElementById('description').value;
+      if (!description) {
+        alert('Please enter a description.');
+        event.preventDefault();
+      }
+    }); 
+  </script>
 </body>
 </html>

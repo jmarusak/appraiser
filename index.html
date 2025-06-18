@@ -46,11 +46,14 @@
     const estimateValueButton = document.getElementById('estimate-value-button');
     estimateValueButton.addEventListener('click', function (event) {
       const description = document.getElementById('description').value;
+      const resultsDiv = document.getElementById('results');
       if (!description) {
         alert('Please enter a description.');
         event.preventDefault();
+      } else {
+        resultsDiv.innerHTML = description;
       }
-    }); 
+    });
   </script>
 </body>
 </html>

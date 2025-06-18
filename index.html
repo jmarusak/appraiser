@@ -51,7 +51,21 @@
         alert('Please enter a description.');
         event.preventDefault();
       } else {
-        resultsDiv.innerHTML = description;
+        fetch('/', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ description: description })
+        })
+        .then(response => response.json())
+        .then(data => {
+          resultsDiv.innerHTML = data.result;
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          resultsDiv.innerHTML = 'An error occurred.';
+        });
       }
     });
   </script>

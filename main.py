@@ -97,7 +97,7 @@ def appraise_value(request: ValuationRequest) -> ValuationResponse:
     Calls Gemini API with Search Tool to estimate item value, then parses the result into a ValuationResponse.
     """
 
-    currency = "CAD"
+    currency = "USD"
 
     prompt_valuation = (
         prompt_valuation_template 
@@ -113,6 +113,8 @@ def appraise_value(request: ValuationRequest) -> ValuationResponse:
     image_uri = request.image_uri
     image_data = base64.b64decode(request.image_data.split(",", 1)[1]) if request.image_data else None 
     mime_type = request.content_type
+
+    config_with_search = None
 
     if image_data:
         response_with_search = client.models.generate_content(

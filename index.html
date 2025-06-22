@@ -52,6 +52,10 @@
     </div>
   </div>
   <script>
+    let image_uri = null;
+    let image_data = null;
+    let content_type = null;
+
     const estimateValueButton = document.getElementById('estimate-value-button');
     estimateValueButton.addEventListener('click', function (event) {
       const description = document.getElementById('description').value;
@@ -65,7 +69,12 @@
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({ description: description })
+          body: JSON.stringify({
+            description: description,
+            image_uri: image_uri,
+            image_data: image_data,
+            content_type: content_type
+          })
         })
         .then(response => response.json())
         .then(data => {
@@ -138,8 +147,11 @@
           })
           .then(response => response.json())
           .then(data => {
+            image_uri = data.image_uri;
+            image_data = data.image_data;
+            content_type = data.content_type;
             const imagePreview = document.getElementById('image-preview');
-            imagePreview.innerHTML = `<img src="${data.data_url}" alt="Uploaded Image" class="max-w-full h-full mx-auto object-contain">`;
+            imagePreview.innerHTML = `<img src="${data.image_data}" alt="Uploaded Image" class="max-w-full h-full mx-auto object-contain">`;
           })
           .catch(error => {
             console.error('Error:', error);

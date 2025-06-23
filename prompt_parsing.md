@@ -10,6 +10,6 @@ The **ValuationResponse** schema is:
 
 Ensure the resulting JSON is valid and contains the following fields:
 - `estimated_value`
-- `currency` (using ISO 4217 currency code: {{currency}})
+- `product_name`
 - `reasoning`
 - `search_urls`

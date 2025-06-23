@@ -24,7 +24,7 @@ MODEL_ID = os.environ.get("GOOGLE_CLOUD_MODEL_ID")
 STORAGE_BUCKET = os.environ.get("GOOGLE_CLOUD_STORAGE_BUCKET")
 
 storage_client = storage.Client(project=PROJECT_ID)
-client = genai.Client(vertexai=False, project=PROJECT_ID, location=LOCATION)
+client = genai.Client(vertexai=True, project=PROJECT_ID, location=LOCATION)
 
 class ValuationRequest(BaseModel):
     description: str 
@@ -34,6 +34,7 @@ class ValuationRequest(BaseModel):
 
 class ValuationResponse(BaseModel):
     estimated_value: float
+    product_name: str
     reasoning: str
     search_urls: list[str]
 
@@ -97,7 +98,7 @@ def appraise_value(request: ValuationRequest) -> ValuationResponse:
     Calls Gemini API with Search Tool to estimate item value, then parses the result into a ValuationResponse.
     """
 
-    currency = "USD"
+    currency = "CAD"
 
     prompt_valuation = (
         prompt_valuation_template 

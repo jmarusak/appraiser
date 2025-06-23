@@ -35,7 +35,7 @@ class ValuationRequest(BaseModel):
 class ValuationResponse(BaseModel):
     estimated_value: float
     product_name: str
-    reasoning: str
+    product_description: str
     search_urls: list[str]
 
 app = FastAPI(

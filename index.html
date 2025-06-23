@@ -48,6 +48,9 @@
         <div id="results" class="h-full">
           <!-- Valuation results will be displayed here -->
         </div>
+        <div id="spinner" class="hidden absolute inset-0 flex items-center justify-center bg-gray-50/75">
+          <div class="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-blue-500"></div>
+        </div>
       </div>
     </div>
   </div>
@@ -64,6 +67,9 @@
         alert('Please enter a description.');
         event.preventDefault();
       } else {
+
+        document.getElementById("spinner").classList.remove("hidden");
+
         fetch('/appraise', {
           method: 'POST',
           headers: {
@@ -78,6 +84,8 @@
         })
         .then(response => response.json())
         .then(data => {
+
+            document.getElementById("spinner").classList.add("hidden");
             
             // Format the currency
             function formatCurrency(value, currency) {
@@ -100,7 +108,7 @@
                         <br>
                         <p class="font-semibold">Product Name:</p> <p class="text-sm text-gray-700">${data.product_name}</p>
                         <br>
-                        <p class="font-semibold">Reasoning:</p> <p class="text-sm text-gray-700">${data.reasoning}</p>
+                        <p class="font-semibold">Product Description:</p> <p class="text-sm text-gray-700">${data.product_description}</p>
                     </div>
             `;
 

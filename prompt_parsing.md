@@ -11,5 +11,5 @@ The **ValuationResponse** schema is:
 Ensure the resulting JSON is valid and contains the following fields:
 - `estimated_value`
 - `product_name`
-- `reasoning`
+- `product_description`
 - `search_urls`
